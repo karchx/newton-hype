@@ -1,5 +1,4 @@
-sumOfSquares :: [Integer] -> Integer
-sumOfSquares l = sum [x * x | x <- l]
+import Limits
 
 secondDegreeEquations :: Double -> Double -> Double -> [Double]
 secondDegreeEquations a b c = 
@@ -16,9 +15,10 @@ test n | n > 0 = (n-1)
 
 main :: IO()
 main = do
-  let result =  sumOfSquares [1, 2, 3]
-  let resultTest = secondDegreeEquations 1 3 2
-  let resultAbsolute = absoluteValue (-4567899)
-  let result2 = test 100
-
+  -- let result = limit (\n -> (2*n+1)/(n+5)) 0.001 
+  let result2 = binomialSquared (-2) (-3)
+  -- let result =  sumOfSquares [1, 2, 3]
+  -- let resultTest = secondDegreeEquations 1 3 2
+  -- let resultAbsolute = absoluteValue (-4567899)
+  -- let result2 = test 100
   print result2
