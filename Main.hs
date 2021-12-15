@@ -11,12 +11,14 @@ absoluteValue :: (Num a, Ord a) => a -> a
 absoluteValue x | x > 0 = x
                 | otherwise = -x
 
+test :: Int -> Int
+test n | n > 0 = (n-1)
+
 main :: IO()
 main = do
   let result =  sumOfSquares [1, 2, 3]
   let resultTest = secondDegreeEquations 1 3 2
   let resultAbsolute = absoluteValue (-4567899)
+  let result2 = test 100
 
-  print result
-  print resultTest
-  print resultAbsolute
+  print result2
