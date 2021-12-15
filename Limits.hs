@@ -1,12 +1,19 @@
 module Limits where
 
+parse :: [Int] ->  String
+parse xs = show  [x | x <- map xs]
+
 limit :: (Double -> Double) -> Double -> Double
 limit f a = 
   head[f x | x <- [1..],
              maximum [abs (f y - f x) | y <- [x+1..x+100]] < a ]
 
-binomialSquared ::  (Num a) => a -> a -> a -> a
-binomialSquared x y = x^2 + 2*(x*y) + y^2
 
-applyTwice :: (a -> a) -> a -> a
-applyTwice f x = f (f x)
+
+binomialSquared :: Int -> Int -> IO()
+binomialSquared x y = do
+    let xSquaree = x^2
+    let xyDouble = 2*(x*y)
+    let ySquare = y^2
+    print (show xSquaree ++ "x^2 + " ++ show xyDouble ++ "xy + " ++ show ySquare ++ "y²")
+
