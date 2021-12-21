@@ -1,4 +1,4 @@
 import Limits
 
 main :: IO()
-main = binomialSquared 2 3 
+main = binomialSquared 2 5

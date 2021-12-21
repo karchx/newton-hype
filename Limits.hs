@@ -1,8 +1,5 @@
 module Limits where
 
-parse :: [Int] ->  String
-parse xs = show  [x | x <- map xs]
-
 limit :: (Double -> Double) -> Double -> Double
 limit f a = 
   head[f x | x <- [1..],
@@ -15,5 +12,5 @@ binomialSquared x y = do
     let xSquaree = x^2
     let xyDouble = 2*(x*y)
     let ySquare = y^2
-    print (show xSquaree ++ "x^2 + " ++ show xyDouble ++ "xy + " ++ show ySquare ++ "y²")
+    print (show xSquaree ++ "x^2 + " ++ show xyDouble ++ "xy + " ++ show ySquare ++ "y^2")
 
