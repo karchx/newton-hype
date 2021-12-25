@@ -22,3 +22,34 @@ listaVector :: Num a => [a] -> Vector a
 listaVector xs = listArray(1,n) xs
   where n = length xs
 
+
+listaMatriz :: Num a => [[a]] -> Matriz a
+listaMatriz xss = listArray ((1,1), (m,n)) (concat xss)
+  where m = length xss
+        n = length (head xss)
+
+numFilas :: Num a => Matriz a -> Int
+numFilas = fst . snd . bounds
+
+numColumnas :: Num a => Matriz a -> Int
+numColumnas = snd . snd . bounds
+
+dimension :: Num a => Matriz a -> (Int, Int)
+dimension = snd . bounds
+
+-- ----------------------------------------------------------------------
+-- Suma de matrices
+-- ----------------------------------------------------------------------
+sumaMatrices :: Num a => Matriz a -> Matriz a -> Matriz a
+sumaMatrices p q =
+  array ((1,1), (m,n)) [((i,j),p!(i,j)+q!(i,j))
+                       | i <- [1..m], j <- [1..n]]
+  where (m,n) = dimension p
+
+
+identidad :: Num a => Int -> Matriz a
+identidad n = 
+  array ((1,1), (n,n))
+        [((i,j), f i j) | i <- [1..n], j <- [1..n]]
+  where f i j | i == j = 1
+              | otherwise = 0
