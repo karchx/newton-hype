@@ -5,7 +5,7 @@ type Vector a = Array Int a
 type Matriz a = Array (Int, Int) a
 
 limit :: (Double -> Double) -> Double -> Double
-limit f a = 
+limit f a =
   head[f x | x <- [1..],
              maximum [abs (f y - f x) | y <- [x+1..x+100]] < a ]
 
@@ -48,7 +48,7 @@ sumaMatrices p q =
 
 
 identidad :: Num a => Int -> Matriz a
-identidad n = 
+identidad n =
   array ((1,1), (n,n))
         [((i,j), f i j) | i <- [1..n], j <- [1..n]]
   where f i j | i == j = 1
