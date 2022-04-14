@@ -2,6 +2,6 @@
 
 ## Docker
 ```bash
-$ docker build -t karch .
-$ docker run -it karch
+$ docker build -t <name container> .
+$ docker run -it <name container>
 ```
