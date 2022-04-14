@@ -1,4 +1,4 @@
-module Squares where
+module Algebra where
 
 -- Sum of Squares
 -- sumOfSquares 3 == 14
