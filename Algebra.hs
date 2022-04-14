@@ -16,3 +16,13 @@ pythagorean n = [(x,y,z) | x <- [1..n],
                             y <- [1..n],
                             z <- [1..n],
                             x^2 + y^2  == z^2]
+
+
+-- Factorial
+-- factorial 5 = 5 * 4 * 3 * 2 * 1 == 120 
+factorial :: Int -> Int
+factorial 0 = 1
+factorial x = x * (x-1)
+
+-- second degree equations
+-- x = -b +- sqrt(b^2 - 4*a*c) / 2*a-
