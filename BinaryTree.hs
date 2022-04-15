@@ -1,3 +1,4 @@
+module BinaryTree where
 
 data Arbol a = H a
   | N a (Arbol a)(Arbol a)
