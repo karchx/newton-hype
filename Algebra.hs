@@ -26,3 +26,9 @@ factorial x = x * (x-1)
 
 -- second degree equations
 -- x = -b +- sqrt(b^2 - 4*a*c) / 2*a-
+
+square :: Float -> Float
+square n = n * n
+
+equationSecond :: Float -> Float -> Float -> Float
+equationSecond a b c = (-b + sqrt((square b) - (4 * a * c))) / (2 * a)

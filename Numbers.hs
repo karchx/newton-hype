@@ -1,19 +1,21 @@
 module Numbers where
 
--- ==============================================
--- Redefinicion de map
--- map (2*) [1,2,3] -> [2,4,6]
--- ==============================================
+data Entidade = A | B | C | D | E | F | G 
+		          | H | I | J | K | L | M | N
+							| O | P | Q | R | S | T | U
+							| V | W | X | Y | Z | Inespecifico
+		deriving(Eq, Bounded, Enum)
 
-n_map :: (a -> b) -> [a] -> [b]
-n_map f xs = [f x | x <- xs]
+instance Show Entidade where
+	show A = "A"; show B = "B"; show C = "C";
+	show D = "D"; show E = "E"; show F = "F";
+	show G = "G"; show H = "H"; show I = "I";
+	show J = "J"; show K = "K"; show L = "L";
+	show M = "M"; show N = "N"; show O = "O";
+	show P = "P"; show Q = "Q"; show R = "R";
+	show S = "S"; show T = "T"; show U = "U";
+	show V = "V"; show W = "W"; show X = "X";
+	show Y = "Y"; show Z = "Z"; show Inespecifico = "*";
 
--- ==============================================
--- Redefinicion de filter
--- filter even [1,3,5,4,2,6,1] -> [4,2,6]
--- filter (>3) [1,3,5,4,2,6,1] -> [5,4,6]
--- ==============================================
-
-n_filter :: (a -> Bool) -> [a] -> [a]
-n_filter  p xs = [x | x <- xs, p x]
-
+entidades :: [Entidade]
+entidades = [minBound..maxBound]
