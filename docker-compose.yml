@@ -7,3 +7,5 @@ services:
       dockerfile: Dockerfile
     image: karchx/hs-shell 
     container_name: hs-shell
+    volumes:
+      - ./:/karch/
