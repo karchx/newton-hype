@@ -1,5 +1,5 @@
 module Graphs where
 
-Hi :: String
+Hi :: IO()
 Hi = do
     print("Hello Graphs")
