@@ -51,3 +51,13 @@ describeList xs = "The list is" ++ what xs
     where what []  = " empty."
           what [x] = " a singleton list."
           what xs  = " a lorge list"
+
+maximum' :: (Ord a) => [a] -> a
+maximum' []     = error "Empty list."
+maximum' [x]    = x
+maximum' (x:xs) = x `max` (maximum' xs)
+
+replicate' :: (Num i, Ord i) => i -> a -> [a]
+replicate' n x
+    | n <= 0    = []
+    | otherwise = x:replicate' (n-1) x
