@@ -68,9 +68,25 @@ take' n _
 take' _ []      = []
 take' n (x:xs)  = x : take' (n-1) xs
 
+-- ANALYSIS
+
+-- reserve' "hola"
+-- reserve' "ola" ++ ['h']
+-- reserve' "la" ++ ['o'] ++ ['h']
+-- reserve' "a" ++ ['l'] ++ ['o'] ++ ['h']
+-- reserve' "" ++ ['a'] ++ ['l'] ++ ['o'] ++ ['h']
+-- reserve' => "aloh"
+
 reserve' :: [a] -> [a]
 reserve' []     = []
 reserve' (x:xs) = reserve' xs ++ [x]
+
+-- ANALYSIS 
+
+-- zip' [1,2,3] ['a', 'b']
+-- zip' [2,3] ['b'] => [(1,'a')]
+-- zip' [3] [] => [(1,'a') (2,'b')]
+-- zip' [] [] => [(1, 'a') (2,'b') []]
 
 zip' :: [a] -> [b] -> [(a,b)]
 zip' [] _           = []
