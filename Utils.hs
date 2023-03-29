@@ -92,3 +92,20 @@ zip' :: [a] -> [b] -> [(a,b)]
 zip' [] _           = []
 zip' _ []           = []
 zip' (x:xs) (y:ys)  = (x,y):zip' xs ys
+
+-- ANLYSIS
+
+-- elem' 2 [3,2,1]
+-- elem' 2 == 3 | otherwise 2 [2,1]
+-- elem' 2 == 2 => True
+
+-- elem' 2 [3,4,1]
+-- elem' 2 == 3 | otherwise 2 [4,1]
+-- elem' 2 == 3 | otherwise 2 [1]
+-- elem' 2 == 1 | otherwise 2 []
+-- elem' 2 [] => False
+elem' :: (Eq a) => a -> [a] -> Bool
+elem' a []      = False
+elem' a (x:xs)
+    | a == x    = True
+    | otherwise = a `elem'` xs
