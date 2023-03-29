@@ -71,3 +71,8 @@ take' n (x:xs)  = x : take' (n-1) xs
 reserve' :: [a] -> [a]
 reserve' []     = []
 reserve' (x:xs) = reserve' xs ++ [x]
+
+zip' :: [a] -> [b] -> [(a,b)]
+zip' [] _           = []
+zip' _ []           = []
+zip' (x:xs) (y:ys)  = (x,y):zip' xs ys
