@@ -138,3 +138,6 @@ product' = foldr1 (*)
 
 filter' :: (a -> Bool) -> [a] -> [a]
 filter' p = foldr (\x acc -> if p x then x : acc else acc) []
+
+sqrtSums :: Int
+sqrtSums = length (takeWhile (<1000) (scanl1 (+) (map sqrt [1..]))) + 1
