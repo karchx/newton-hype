@@ -141,3 +141,6 @@ filter' p = foldr (\x acc -> if p x then x : acc else acc) []
 
 sqrtSums :: Int
 sqrtSums = length (takeWhile (<1000) (scanl1 (+) (map sqrt [1..]))) + 1
+
+oddSqureSum :: Integer
+oddSqureSum = sum . takeWhile (<10000) . filter odd . map (^2) $ [1..]
