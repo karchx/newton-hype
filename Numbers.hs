@@ -1,9 +1,9 @@
 module Numbers where
 
 data Entidade = A | B | C | D | E | F | G 
-		          | H | I | J | K | L | M | N
-							| O | P | Q | R | S | T | U
-							| V | W | X | Y | Z | Inespecifico
+		    | H | I | J | K | L | M | N
+			| O | P | Q | R | S | T | U
+			| V | W | X | Y | Z | Inespecifico
 		deriving(Eq, Bounded, Enum)
 
 instance Show Entidade where
@@ -19,3 +19,7 @@ instance Show Entidade where
 
 entidades :: [Entidade]
 entidades = [minBound..maxBound]
+
+largestDivisible :: (Integral a) => a
+largestDivisible = head (filter p [100000,99999..])
+	where p  x = x `mod` 3829 == 0
