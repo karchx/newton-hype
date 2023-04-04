@@ -53,9 +53,7 @@ describeList xs = "The list is" ++ what xs
           what xs  = " a lorge list"
 
 maximum' :: (Ord a) => [a] -> a
-maximum' []     = error "Empty list."
-maximum' [x]    = x
-maximum' (x:xs) = x `max` (maximum' xs)
+maximum' = foldr1 (\x acc -> if x > acc then x else acc)
 
 replicate' :: (Num i, Ord i) => i -> a -> [a]
 replicate' n x
@@ -131,3 +129,12 @@ zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
 flip' :: (a -> b -> c) -> (b -> a -> c)
 flip' f = g
     where g x y = f y x
+
+reverse' :: [a] -> [a]
+reverse' = foldl (\acc x -> x : acc) []
+
+product' :: (Num a) => [a] -> a
+product' = foldr1 (*)
+
+filter' :: (a -> Bool) -> [a] -> [a]
+filter' p = foldr (\x acc -> if p x then x : acc else acc) []
