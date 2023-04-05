@@ -35,3 +35,10 @@ equationSecond a b c = (- b + sqrt (square b - (4 * a * c))) / (2 * a)
 -- a^2 - b^2 = (a+b)(a-b)
 -- differenceSquares :: Int -> Int -> Int
 -- differenceSquares a b = (a_b)
+
+primes :: [Int] -> [Int]
+primes [] = []
+primes (p:xs) = p : primes [x | x <- xs, x `mod` p /= 0]
+
+criba :: Int -> [Int]
+criba n = primes [numbers | numbers <- [2..n]]
