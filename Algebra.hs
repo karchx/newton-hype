@@ -42,3 +42,7 @@ primes (p:xs) = p : primes [x | x <- xs, x `mod` p /= 0]
 
 criba :: Int -> [Int]
 criba n = primes [numbers | numbers <- [2..n]]
+
+mcd :: [Int] -> [Int]
+mcd [] = []
+mcd xs = map (+2) xs 
