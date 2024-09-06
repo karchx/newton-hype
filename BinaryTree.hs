@@ -1,53 +1,61 @@
 module BinaryTree where
 
-data Arbol a = H a
-  | N a (Arbol a)(Arbol a)
-  deriving (Show, Eq)
+import System.Random (randomRIO)
 
-nHojas :: Arbol a -> Int
-nHojas (H _) = 1
-nHojas (N x i d) = nHojas i + nHojas d
+data Tree a = EmptyTree
+  | Node a (Tree a) (Tree a) deriving (Read, Eq)
 
-nNodos :: Arbol a -> Int
-nNodos (H _) = 1
-nNodos (N x i d) = 1 + nNodos i + nNodos d
 
-profundidad :: Arbol a -> Int
-profundidad (H _) = 0
-profundidad (N x i d) = 1 + max (profundidad i) (profundidad d)
+treeInsert :: (Ord a) => a -> Tree a -> Tree a
+treeInsert x EmptyTree = Node x EmptyTree EmptyTree
+treeInsert x (Node a left right)
+  | x == a = Node x left right
+  | x < a = Node a (treeInsert x left) right
+  | x > a = Node a left (treeInsert x right)
 
--- Regresa el orden del arbol de izquierda a derecha
-preorden :: Arbol a -> [a]
-preorden (H x) = [x]
-preorden (N x i d) = x : (preorden i ++ preorden d)
+treeElem :: (Ord a) => a -> Tree a -> Bool
+treeElem x EmptyTree = False
+treeElem x (Node a left right)
+  | x == a = True
+  | x < a = treeElem x left
+  | x > a = treeElem x right
 
--- Primero recorre el subarbol izquierdo, luego el derecho y por ultimo la raiz
-posorden :: Arbol a -> [a]
-posorden (H x) = [x]
-posorden (N x i d) = posorden i ++ posorden d ++ [x]
+treeHeight :: Tree a -> Int
+treeHeight EmptyTree = 0
+treeHeight (Node a left right) = maximum [1, lh, rh]
+  where lh = 1 + treeHeight left
+        rh = 1 + treeHeight right
 
--- Primero la raiz, luego el subarbol izquierdo y por ultimo el derecho, sin usar (++)
-preordenIt :: Arbol a -> [a]
-preordenIt x = preordenItAux x []
-  where preordenItAux (H x) xs     = x:xs
-        preordenItAux (N x i d) xs =
-          x : preordenItAux i (preordenItAux d xs)
+instance (Show a) => Show (Tree a) where
+  show EmptyTree = ""
+  show tree = show' tree 0 (widesElement tree + 1) "\n"
 
--- Funcion espejo de arbol recibido
-espejo :: Arbol a -> Arbol a
-espejo (H x) = H x
-espejo (N x i d) = N x (espejo d) (espejo i)
+show' :: (Show a) => Tree a -> Int -> Int -> String -> String
+show' EmptyTree _ _ _ = " "
+show' (Node a left right) depth width symbol =
+  leftside ++ "\n" ++ center ++ rightside
+  where center = replicate (depth - length symbol) ' ' ++ show a ++ symbol
+        leftside = show' left (depth + width) width "\\"
+        rightside = show' right (depth + width) width "/"
 
-takeArbol :: Int -> Arbol a -> Arbol a
-takeArbol _ (H x)     = H x
-takeArbol 0 (N x i d) = H x
-takeArbol n (N x i d) =
-  N x(takeArbol (n-1) i) (takeArbol (n-1) d)
+widesElement :: (Show a) => Tree a -> Int
+widesElement EmptyTree = 0
+widesElement (Node center left right) = maximum [l, r, c]
+  where l = widesElement left
+        r = widesElement right
+        c = length $ show center
 
-{--
-    9
-   / \
-   3  7
-  / \
-  2  4
---}
+makeTree :: (Ord a) => [a] -> Tree a
+makeTree = foldr treeInsert EmptyTree . reverse
+
+randomTree :: Int -> IO (Tree Int)
+randomTree n = do
+  numbers <- randomList n
+  return $ makeTree numbers
+
+randomList :: Int -> IO([Int])
+randomList 0 = return []
+randomList n = do
+  r <- randomRIO (1, 99)
+  rs <- randomList (n - 1)
+  return (r:rs)
